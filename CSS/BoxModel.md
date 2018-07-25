@@ -98,4 +98,109 @@
     
     常用线型：solid------实线
             dashed-----虚线
-            其余线型容易出现兼容性问题       
+            其余线型容易出现兼容性问题    
+            
+>3、margin:盒子与其它元素之间的距离(使用方式基本和padding用法相似)
+    
+    margin-top
+    margin-right
+    margin-buttom
+    margin-left 
+    
+**外边距塌陷问题** 
+
+    两个盒子垂直一个设置上外边距，一个设置下外边距，取的设置较大的值。
+    
+    1、上下盒子的margin小的值会塌陷在大的值里 
+    2、嵌套的盒子（父子关系）也会发生塌陷
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+        
+        		/*上下盒子发生塌陷的现象*/
+        		
+		.box1 {
+			width: 200px;
+			height: 200px;
+			background-color: skyblue;
+			margin-bottom: 120px;
+		}
+
+		.box2 {
+			width: 200px;
+			height: 200px;
+			background-color: yellowgreen;
+			margin-top: 80px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+</body>
+</html>
+```
+**左右盒子没有塌陷的现象，距离是两个外边距相加**
+
+>4、文本居中策略
+
+    text-align: center 文本居中 不区分单行和多行
+    对于单行文本居中：让行高等于高度，line-height=height
+    对于多行文本垂直居中：不设置盒子的高度，用文本行高撑开，上下内边距给一个相同的数值，盒子居中。
+    
+>5、标准文档流
+
+    特点： 1、文字空白出现折叠现象；
+          2、文本类的元素会并排，高低不齐，底边对齐；
+          3、文字排到最右侧，自动换行。
+          
+    对元素进行分类：
+          1、块级元素：所有的容器级标签都是块级元素，文本级元素中的p元素也是块级元素
+            例如：body、h1~h6、dl、dt、ul、li、table、tr、td、div、form
+            
+          2、行内元素：除了p元素之外的所有文本级标签都是行内元素
+            例如：a、img、span、input、i、em、strong、del、ins
+            
+    行内元素特点：
+          1、设置宽高无效(是由内容撑开的)；
+          2、行内元素与行内元素可以并排在一行；
+          
+    块级元素特点：
+          1、可以设置宽高；
+          2、独占一行，不与其它标签并排；
+          3、不设置宽高，会继承父亲宽度的100%；
+          
+    行块元素之间的转换：
+          display: block; 常用
+          display: none; 隐藏元素
+          display: inline-block 行内块
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/*行内元素添加display:block属性后，可设置宽高*/
+		span {
+			height: 200px;
+			width: 200px;
+			display: block;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<span>行内元素设置宽高无效</span>
+</body>
+</html>
+```
+![行内元素](../picture/height.png)
