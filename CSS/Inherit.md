@@ -1,6 +1,6 @@
 >继承性：CSS中有一部分属性，标签即使不设置也可能加载。
 >>可被继承的属性有：文字的大部分属性都可以继承(color、font-size、font-family、font-style、font-weight、line-height)\
->>不可继承的属性有：width、height、backgroud-color、h系列、a;
+>>不可继承的属性有：width、height、backgroud-color、h系列、a、盒模型、定位、浮动;
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">

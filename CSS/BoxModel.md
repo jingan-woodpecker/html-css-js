@@ -204,3 +204,33 @@
 </html>
 ```
 ![行内元素](../picture/height.png)
+
+    display: inline-block;用法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	span {
+		width: 100px;
+		height: 100px;
+		background-color: green;
+		/*可以设置宽高，也可以并排显示*/
+		display: inline-block;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		<span>菜鸡互啄</span>
+		<span>菜鸡互啄</span>
+		<span>菜鸡互啄</span>
+	</div>
+</body>
+</html>
+```
+![display](../picture/display.png)
+
