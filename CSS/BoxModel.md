@@ -205,7 +205,7 @@
 ```
 ![行内元素](../picture/height.png)
 
-    display: inline-block;用法
+    display: inline-block;行内块用法
 
 ```html
 <!DOCTYPE html>
