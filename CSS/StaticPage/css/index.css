@@ -1,0 +1,135 @@
+/*banner部分*/
+.banner {
+	width: 100%;
+	height: 460px;
+	overflow: hidden;
+	position: relative;
+}
+
+.banner .pics li {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -960px;
+	width: 1920px;
+	display: none;
+}
+
+
+.banner .pics li.active {
+	display: block;
+}
+
+.banner .ctrl {
+	position: absolute;
+	left: 50%;
+	margin-left: -60px;
+	width: 120px;
+	height: 12px;
+	bottom: 20px;
+}
+
+.banner .ctrl li {
+	float: left;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	margin-right: 15px;
+	background-color: #fff;
+	opacity: 0.5;
+}
+
+.banner .ctrl li.last {
+	margin-right: 0;
+}
+
+.content {
+	width: 100%;
+	background: url(../img/mainbg.jpg) no-repeat center bottom;
+	padding: 50px 0 57px 0;
+	overflow: hidden;
+}
+
+.content .products {
+	border-bottom: 1px solid #dbe1e7;
+	height: 229px;
+	position: relative;
+}
+
+.content .products li {
+	float: left;
+	width: 218px;
+	height: 180px;
+	margin-right: 42px;
+}
+
+.content .products li.last {
+	margin-right: 0;
+}
+
+.content .products li a {
+	display: block;
+	height: 180px;
+	text-align: center;
+}
+
+.content .products li a img {
+	/*根据比例算出高*/
+	width: 218px;
+	height: 128px;
+}
+
+.content .products li a h3 {
+	font-size: 14px;
+	line-height: 31px;
+	font-weight: 700;
+	color: #8F4866;
+}
+
+.content .products li a span {
+	padding-right: 12px;
+	font-size: 12px;
+	color: #38b774;
+	line-height: 26px;
+	background: url("../img/images/arrow.png") no-repeat right center;
+}
+
+.content .products li a:hover {
+	color: #fff;
+	background-color: #38b774;
+}
+
+.content .products li a:hover span {
+	color: #fff;
+	background: url("../img/images/arrow2.png") no-repeat right ;
+}
+
+.content .products li a:hover img {
+	/*透明度*/
+	opacity: 0.8;
+	/*兼容ie浏览器*/
+	filter: alpha(opacity=80);
+}
+
+.content .products ol {
+	bottom: -5px;
+	position: absolute;
+	left: 50%;
+	width: 50px;
+	padding: 0 18px;
+	margin-left: -34px;
+	background-color: #fff;
+}
+
+.content .products ol li {
+	float: left;
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	margin-right: 12px;
+	background: #b5c0cb;
+}
+
+.content .products ol li.current {
+	background-color: #2fbc71;
+}

@@ -1,6 +1,104 @@
+body {
+	font-size: 14px;
+	color: #444866;
+	font-family: "Arial","微软雅黑","宋体";
+}
+
+a {
+	text-decoration: none;
+}
+
+.inner_c {
+	width: 1000px;
+	/*不需要设置版心高度，因为每个版心高度不一样，单独设置即可
+	height: 58px;*/
+	margin: 0 auto;
+}
 /*header部分*/
 .header {
 	width: 100%;
 	height: 58px;
 	background-color: #191D3A;
+}
+
+.header .logo {
+	float: left;
+	width: 206px;
+	padding: 0 44px 0 0;
+}
+
+.header .logo a {
+	background: url("../img/logo.png") no-repeat;
+	display: block;
+	width: 162px;
+	height: 58px;
+	text-indent: -9999em;
+}
+
+.header .nav {
+	float: left;
+	width: 528px;
+}
+
+.header .nav li {
+	float: left;
+	width: 87px;
+	height: 58px;
+	text-align: center;
+	line-height: 58px;
+	border-right: 1px solid #252947;
+}
+
+.header .nav li a {
+	display: block;
+	color: #818496;
+}
+
+.header .nav li.current a {
+	color: #fff;
+}
+
+.header .nav li a:hover {
+	color: #fff;
+}
+
+.header .nav li.current {
+	background: #252947;
+}
+
+.header .join {
+	float: left;
+	width: 100px;
+	padding-left: 10px;
+	padding-top: 12px;
+}
+
+.header .join a {
+	display: block;
+	width: 100px;
+	height: 34px;
+	background-color: #38B774;
+	color: #fff;
+	border: 1px solid #3aca7a;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 34px;
+}
+
+.header .language {
+	float: right;
+	height: 58px;
+	line-height: 58px;
+}
+
+.header .language a.ch {
+	color: #38B774;
+	text-align: center;
+	line-height: 58px;
+}
+
+.header .language a.en {
+	color: #818496;
+	text-align: center;
+	line-height: 58px;
 }
