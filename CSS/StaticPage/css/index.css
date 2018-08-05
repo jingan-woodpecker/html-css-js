@@ -39,6 +39,8 @@
 	background-color: #fff;
 }
 
+}
+
 /*content部分*/
 .content {
 	width: 100%;
@@ -49,6 +51,7 @@
 
 .content .products {
 	position: relative;
+	margin-top: 50px;
 	height: 229px;
 	border-bottom: 1px solid #DBE1E7;
 }
@@ -124,4 +127,176 @@
 	margin: 0 7px;
 	border-radius: 50%;
 	background: #B5C0CB;
+}
+
+.content .products ol li.current {
+	background-color: #2FBC71;
+}
+
+.company_info {
+	height: 500px;
+	margin-top: 53px;
+}
+
+.company_info .news_left {
+	position: relative;
+	float: left;
+	height: 310px;
+	width: 500px;
+}
+
+.company_info .news_left .more a{
+	display: block;
+	width: 64px;
+	height: 26px;
+	text-align: center;
+	line-height: 27px;
+	color: #30C3BC;
+	border-radius: 5px;
+	font-size: 12px;
+	border: 1px solid #33B972;
+}
+
+.company_info .news_left .more a:hover {
+	color: #fff;
+	background-color:  #38b774;
+}
+
+.company_info .news_left .more {
+	position: absolute;
+	top: 41px;
+	right: 216px;
+}
+
+.company_info .news_left .more span {
+	position: absolute;
+	bottom: 5px;
+	right: 7px;
+}
+
+.news_left .boya_news .headerlines {
+	width: 460px;
+	position: absolute;
+	top: 110px;
+	left: 0;
+	margin-top: 10px;
+}
+
+.news_left .headerlines li a {
+	position: relative;
+	display: block;
+	height: 29px;
+	color: #444866;
+	font-size: 14px;
+	line-height: 29px;
+	padding: 9px 0;
+	border-bottom: 1px solid #DBE1E7;
+}
+
+.news_left .headerlines li a:hover {
+	color: #32B976;
+}
+
+.news_left .headerlines li span {
+	position: absolute;
+	color: #CAC4CF;
+	right: 5px;
+	top: 7.5px;
+}
+
+.company_info .jobs_right {
+	position: relative;
+	height: 310px;
+	width: 500px;
+	float: left;
+}
+
+.company_info .jobs_right h2 {
+	position: absolute;
+	font-size: 28px;
+	font-weight: 700;
+	color: #fff;
+	width: 112px;
+	height: 28px;
+	line-height: 28px;
+	top: 46px;
+	left: 80px;
+}
+
+.company_info .jobs_right p {
+	position: absolute;
+	top: 77px;
+	left: 81px;
+	color: #fff;
+	width: 112px;
+	line-height: 18px;
+	height: 18px;
+	font-size: 12px;
+}
+
+.company_info .jobs_right .more a{
+	display: block;
+	width: 64px;
+	height: 26px;
+	text-align: center;
+	line-height: 27px;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 12px;
+	border: 1px solid #fff;
+}
+
+.company_info .jobs_right .more a:hover {
+	color: #30C3BC;
+	background-color:  #fff;
+}
+
+.company_info .jobs_right .more {
+	position: absolute;
+	top: 41px;
+	right: 216px;
+}
+
+.company_info .jobs_right .more span {
+	position: absolute;
+	bottom: 5px;
+	right: 7px;
+}
+
+.company_info .jobs_right h3 {
+	position: absolute;
+	top: 115px;
+	left: 20px;
+	color: #fff;
+	height: 20px;
+	font-weight: 700;
+}
+
+.company_info .jobs_right .post {
+	position: absolute;
+	top: 130px;
+	left: 20px;
+}
+
+.company_info .jobs_right .post li {
+	border-bottom: 1px solid #6FDEA3;
+	width: 305px;
+	padding: 6px 0;
+}
+
+.company_info .jobs_right .post a {
+	display: block;
+	color: #fff;
+	height: 25px;
+	line-height: 25px;
+	font-size: 15px;
+}
+
+/*buttom部分*/
+.webinfo {
+	/*position: absolute;
+	top: 57px;*/
+	width: 100%;
+	height: 192px;
+	background-color: #191D3A;
 }
