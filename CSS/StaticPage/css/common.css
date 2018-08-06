@@ -81,6 +81,14 @@ a {
 	border: 1px solid #3aca7a;
 }
 
+
+.header .join a:hover {
+	/*透明度*/
+	opacity: 0.8;
+	/*兼容ie浏览器*/
+	filter: alpha(opacity=80);
+}
+
 .header .language {
 	float: right;
 	height: 58px;
