@@ -23,8 +23,7 @@
 	
 	<!-- 此方法可以设置多个不同格式的视频，来保证兼容性 -->
 	<video controls autoplay>
-		<source src="p-call.mp4"></source>
-		<source></source>
+		<source src="p-call.mp4">
 	</video>
 
     <!--音频-->
