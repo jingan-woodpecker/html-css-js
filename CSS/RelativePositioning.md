@@ -12,6 +12,7 @@
         任意组合： 从top、bottom选一个 left、right选一个
         
      总结：  和自身设置的方向相反移动 
+     
 **相对定位的元素是定位方法中唯一不脱标的**
 ```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -51,4 +52,5 @@
 </body>
 </html>
 ```
+
 ![相对定位](../picture/relative.png)
