@@ -1,0 +1,148 @@
+1、JS概述
+
+    *负责页面的交互和行为
+    
+    *作用
+        (1)数据验证
+        (2)操作html元素
+        (3)制作网页特效(轮播、其它效果)
+        (4)WEB游戏
+        (5)Nodejs进行服务端编程
+        
+    *组成部分
+        a 语言核心 ECMAscript 如变量 数组 函数 对象...
+        b DOM 文档模型对象
+        c BOM 浏览器模型对象
+        
+二、js书写位置
+
+        一、内嵌式
+            * 在页面的任何位置放置一对script标签(一般放置在body中)
+            
+            常见的消息输出
+                * alert() 弹窗
+                * console.log() 控制台输出
+                * prompt() 可以输入内容的弹窗
+                * document.write() 动态表示内容
+                
+            注意： * 分号";"是js语句结束的标志(不加分号，上线压缩文件后，就无法识别哪里表示结束语句)
+```html
+	<script type="text/javascript">
+		alert("javascript");
+	</script>
+```
+
+```html
+	<script type="text/javascript">
+		console.log(123);
+		console.log("abc")
+		console.error("错误信息")
+		console.warn("警告信息")
+	</script>
+```
+
+```html
+	<script type="text/javascript">
+		prompt("请输入内容:");
+	</script>
+```
+
+```html
+	<script type="text/javascript">
+		document.write("<h1>人生苦短，要学javaScript</h1>")
+	</script>
+```
+![](../picture/00.png)
+
+       二、行内式
+       三、外链式
+        
+三、注释
+
+    单行注释符号： "//"
+    多行注释符号： "/*  */
+    不允许多行套多行注释
+
+四、变量
+        
+        js定义变量
+            方式一：  var 变量名 = 值;
+            
+            方式二：  var 变量名
+                     变量名 = 值;
+                     
+            可同时定义多个变量，用逗号分隔开
+                    
+```html
+	<script type="text/javascript">
+		var a = "11";
+
+		var b;
+		b = 100;
+
+		var name = "廖" , age = 20 , sex = "男" 
+		alert(a);
+		alert(b);
+		alert(name);
+	</script>
+```
+
+五、数据类型
+
+     1、基本数据类型
+      Number   数字类型
+      String   字符串
+      undefined 
+      Boolean 布尔类型
+      null
+        
+    2、复杂数据类型
+       Object
+     
+    注意：变量的数据类型由存储的数据类型决定
+         null 空
+         变量定义后不赋值，类型为undefined ，打印后的值也为undefinde
+            
+```html
+    <script type="text/javascript">
+		//typeof检测数据类型
+		console.log(typeof 11);//number
+		console.log(typeof undefined);//undefined
+		console.log(typeof true);//boolean
+		console.log(typeof null);//object
+
+		var b="111";
+		alert(typeof b);//string 
+	</script>
+```
+
+![数据类型](../picture/JS03.png)
+
+六、运算符
+
+    + 数字转换成字符串：先将数字转换成字符串，再和其它字符串进行拼接
+    123+"10" 先把123变成"123",然后与"10"拼接成"12310"
+      123+"" ----->"123"
+      
+    - "123"-10得到110   "123a"-10得到NaN，但NaN也是一种number类型  
+    
+    "3"-"4" 得到-1 字符串  
+    
+    "12" * 4得到48
+    字符串转换成数字
+        Number()  parseInt()  parseFloat()
+        
+```html
+	<script type="text/javascript">
+		var a = 123;
+		var b = "10";
+		c = a + b ;
+		alert(typeof c);
+		document.write("3"-false);//结果为 3，false转为0
+		console.log("20"+2-"6"); //"20"+2---->"202"  结果为196
+	</script>
+```
+
+    
+
+        
