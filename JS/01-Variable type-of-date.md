@@ -118,30 +118,7 @@
 
 ![数据类型](../picture/JS03.png)
 
-六、运算符
 
-    + 数字转换成字符串：先将数字转换成字符串，再和其它字符串进行拼接
-    123+"10" 先把123变成"123",然后与"10"拼接成"12310"
-      123+"" ----->"123"
-      
-    - "123"-10得到110   "123a"-10得到NaN，但NaN也是一种number类型  
-    
-    "3"-"4" 得到-1 字符串  
-    
-    "12" * 4得到48
-    字符串转换成数字
-        Number()  parseInt()  parseFloat()
-        
-```html
-	<script type="text/javascript">
-		var a = 123;
-		var b = "10";
-		c = a + b ;
-		alert(typeof c);
-		document.write("3"-false);//结果为 3，false转为0
-		console.log("20"+2-"6"); //"20"+2---->"202"  结果为196
-	</script>
-```
 
     
 
