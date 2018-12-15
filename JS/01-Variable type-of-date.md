@@ -118,6 +118,36 @@
 
 ![数据类型](../picture/JS03.png)
 
+```html
+	<script type="text/javascript">
+	    var a = "我和";
+	    var b = "你";
+	    var c = a + b;
+	    alert(typeof c);// string
+
+	    var a = 10;
+	    var b = "2";
+	    alert(a + b); // "102"
+	    alert("a" + b); //"a2"
+
+	    var a = "123"; // 纯数字的字符串
+	    var b = 10;
+	    alert(a-b);// 先把"123"变成123 然后减
+
+	    alert("3"-"4");// 3-4 得到-1
+	    alert("3"-"4aa");// NaN not a number
+	    //alert(typeof NaN);// number
+	    
+	    document.write("3"-false);// 3-0
+	    console.log("20"+2-"6");//"20"+2----->"202" - "6" 得到196
+	    
+	    alert(2/2);
+	    alert(12%7);
+	    var num = parseInt(1.999);
+	    alert(num);
+	</script>
+```
+
 
 
     
