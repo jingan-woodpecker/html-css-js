@@ -148,6 +148,30 @@
 	</script>
 ```
 
+如果在文档已完成加载后执行 document.write，整个 HTML 页面将被覆盖。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>菜鸟教程</title>
+</head>
+<body>
+	<h1>每一次美好的相遇，都是生活对你的馈赠</h1>
+	<p>夕阳无限好，不用扬鞭自奋蹄</p>
+
+	<button onclick="myFunction()">点击按钮</button>
+
+	<script>
+		function myFunction() {
+			document.write(Date());
+		}
+	</script>
+</body>
+</html>
+```
+
 
 
     
