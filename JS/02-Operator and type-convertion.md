@@ -52,7 +52,7 @@
 	var i;
 	i = j++;
 
-	alert(i+":"+j);//8:7
+	alert(i+":"+j);//7:8
 
 	var j = 7;
 	var i;
@@ -75,6 +75,7 @@
 	console.log("10" > "9");//false 字符串数字比较，一个个字符对比，1<9,所以false
 	console.log("xikl" < "xili");//true 按字母排序顺序一个个比较，排序靠后的较大
 	console.log("67" > 24);//true 纯数字字符串会隐式转换成数字比较
+	console.log("23ik">11); //false
 	console.log(10 == 10);//true 不严格相等，只要内容相等就相等即"10"==10
 	console.log("10" == 10);//true 
 	console.log(10 === "10");// false 严格相等，内容和类型都要相等
@@ -108,13 +109,19 @@
     
 ```html
 <script type="text/javascript">
-	var num = 12;
-	console.log(3>4 && ++num);//false
-	alert(num);
+	var num = 399;
+	console.log(50<49 && --num); //false
+	console.log(num);  //399
+
+	console.log(50>49 && --num); //398
+	console.log(num);  //398
 	
-	var digit = 10;
-	console.log(10 > 10 || ++digit);
-	alert(digit);
+	var num1 = 199;
+	console.log(1 || num1++); //1
+	console.log(num1);  //199
+
+	console.log(0 || num1++);  //199 
+	console.log(num1);  //200
 </script>
 ```
 
@@ -143,51 +150,57 @@
 
 八、类型转换
 
-    * parseInt()
-    
 ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
 <script type="text/javascript">
-	console.log(parseInt("123"));//123
-	console.log(parseInt("123.8999"));//123
-	// 从左到右直到遇到第一个非数字字符为止,把第一个非数字字符前面的保留下来
-	console.log(parseInt("12df3.99"));//12
-	console.log(parseInt("123.99dd99"));//123	
+	//parseInt parseFloat Number Boolean toString
+
+	//parseInt转换为number类型,遇到小数点或者非数字字符就停止
+	console.log(typeof parseInt("1234"));  //number 1234
+	console.log(parseInt("12.56"));        //12
+	console.log(parseInt("-2344.33"));     //-2344
+	console.log(parseInt("23.33kin"));     //23
+	console.log(parseInt("44kk.e33"));     //44
+	console.log(parseInt("kin335"));       //NaN
+	console.log(parseInt( ));              //NaN
+
+	//parseFloat转换为number类型的浮点数
+	console.log(parseFloat("123.55"));     //123.55
+	console.log(parseFloat("384kk.55"));   //384
+	console.log(parseFloat("kk33.1"));     //NaN
+	console.log(parseFloat("45.2k3"));     //45.2
+
+	//Number 将其它类型转换为Number类型
+	//Number必须要求字符串是纯数字的字符串，假如含有其他非数字或非小数点的字符则统一结果是NaN
+	console.log(Number(true));             //1
+	console.log(Number(false));            //0
+	console.log(Number("23.566"));         //23.566
+	console.log(Number("sss3455"));        //NaN
+
+	//Boolean 把其它类型转换为布尔类型
+	console.log(Boolean(""));              //false
+	console.log(Boolean(0));               //false
+	console.log(Boolean("123"));           //true
+	console.log(Boolean(123));             //true
+
+	//toString 转换为字符串
+	var n=38;
+	n = n.toString();
+	alert(n);
+	//也可直接拼接成字符串
+	n = ""+38
+
 </script>
+</body>
+</html>
 ```
-
-    *parseFloat()
-    
-```html
-<script type="text/javascript">
-	console.log(parseFloat("123.333"));//123.333
-	console.log(parseFloat("ddd233.34"));//NaN
-	console.log(parseFloat("23kk3.45")); //23
-	console.log(parseFloat("45.66kk56"));//45.66
-</script>
-```
-
-    *  Number() 把其它类型转换为数字
-```html
-<script type="text/javascript">
-	console.log(Number("384.84")) //383.84
-	console.log(Number(true)) //1
-	console.log(Number(false)) //0
-	// Number必须要求字符串是纯数字的字符串，假如含有其他非数字或非小数点的字符则统一结果是NaN
-	console.log(Number("dkj5465")) //NaN
-</script>
-```  
-
-    * Boolean() 把其它类型转成布尔值
-    
-```html
-<script type="text/javascript">
-	// Boolean() 把其他类型转成布尔值
-	 alert(Boolean("")); // false
-     alert(Boolean("1245")); // true
-     alert(Boolean(123));// true 非0数字转true
-     alert(Boolean(0)); // false 
-</script>
-```  
 
     * 以某种进制输出 toString()
 
