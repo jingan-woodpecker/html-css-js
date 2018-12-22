@@ -1,3 +1,27 @@
+练习：取一个三位数的“个、十、百位”
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+	    var num = prompt("请输入一个三位数的值：");
+	    //因为prompt接收的是字符串，所以需要转换为数值
+	    var num = parseInt(num);
+	    var ge,shi,bai;
+	    bai = parseInt(num/100);
+	    shi = parseInt((num%100)/10);
+	    ge = parseInt(num%10);
+	    alert("百位数是："+bai + ",十位数是："+shi + ",个位数是："+ge);
+	</script>
+</body>
+</html>
+```
 一、运算符
 
     + 数字转换成字符串：先将数字转换成字符串，再和其它字符串进行拼接
