@@ -120,9 +120,33 @@ arguments用法
 
 	getSum(20,10,28);
 
-	// 定义一个函数 求任意个数的和  
+ // 定义一个函数 求任意个数的和  
+	     function fnAdd() {
+	     	var sum = 0;
+	     	for(var i=0; i<arguments.length; i++) {
+	     		sum += arguments[i];
+	     	}
+	     	alert(sum);
+	     }
+
+	     fnAdd(1,8,70,45);
 	
 </script>
 ```
 
+函数的返回值
 
+```html
+	<script type="text/javascript">
+	     function getSum(a,b) {
+             var sum;
+             sum = a + b;
+             //alert(sum);
+             return sum; // 1 返回一个值 返回到函数调用的地方 2 函数立即结束调用
+             console.log("我一辈子也不会轮到我执行");
+	     }
+
+	     var result = getSum(3,6); // 用result记住函数返回值
+	     document.write(result);
+	</script>
+```
