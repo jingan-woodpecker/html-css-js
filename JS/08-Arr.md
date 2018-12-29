@@ -39,3 +39,33 @@
 	console.log(arr3.length[3]);  //超出数组存储长度，就为undefined 
 </script>
 ```
+
+数组元素的引用
+
+```html
+<script type="text/javascript">
+	var arr = [12,34,56,775,34];
+	console.log(arr[2]);
+	console.log(arr[arr.length-1]);   //最后一个元素
+	console.log(arr[5]);              //长度越界为undefined
+
+	 // 用数组求斐波那契 前20项数
+	 var fibonacci = [];
+	 fibonacci[0] = 1;
+	 fibonacci[1] = 1;
+
+	 for(var i=2; i<=19; i++) {      //注意i=2
+	 	fibonacci[i] = fibonacci[i-1] + fibonacci[i-2];
+	 	console.log(fibonacci[i]);
+	 }
+	 
+	 // 打印整个数组 数组的遍历(访问每一个元素)
+	 // for(var i=0; i<=fibonacci.length-1; i++) {
+	 // 	console.log(fibonacci[i]);
+	 // }
+
+	 for(var i=0, len = fibonacci.length; i<=len-1; i++) {
+            console.log(fibonacci[i]);
+     } 
+</script>
+```
