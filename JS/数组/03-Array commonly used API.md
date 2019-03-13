@@ -70,3 +70,45 @@
 </body>
 </html>
 ```
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	   // 逆序  reverse()
+	  /* var arr = [1,2,3,4,5];
+	   arr.reverse();
+	   console.log(arr);*/
+
+	   // 排序   "7"  "4"  "10" "3"  "6"
+	   // sort 按字符编码进行排序，要按数值大小对数字进行排序，就使用排序函数
+	   var arr = [7,4,10,3,6];
+	   arr.sort(function(a,b) {
+	   	   //return a-b; 升序排序
+	   	   if(a<b) {
+	   	   	  return 1; 
+	   	   } else if(a>b) {
+	   	   	  return -1
+	   	   }
+	   	   return 0;
+	   	});
+	   console.log(arr); // [10, 3, 4, 6, 7]
+
+	   // 搜索
+	   var arr2 = [10,9,12,4,4,56];
+	   var num = 4;
+	   // 返回搜索到的第一个数字4的索引号
+	   var index = arr2.indexOf(num);
+	   // 返回搜索到的最后一个数字4的索引号
+	   var index2 = arr2.lastIndexOf(num);
+	   alert(index2);
+	</script>
+</body>
+</html>
+```
