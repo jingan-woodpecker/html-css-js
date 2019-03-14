@@ -113,6 +113,8 @@
 </html>
 ```
 
+数组应用详解
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -188,8 +190,48 @@
          var arr = [6,8,11,13];
          var res = fnInsertArr(arr,10);
          alert(res);
+
+        // join() 数组转成字符串
+	   var numbers = [1,2,3,4,5];
+	   var res = numbers.join(":");
+	   //console.log(typeof res);
+	   console.log(res);
+	   console.log(numbers.toString());
          
 	</script>
+</body>
+</html>
+```
+
+二维数组和多维数组
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+	    // //  3排3列
+	    //var students = [[1,1],[1,2],[1,3],[2,1],[2,2],[2,3],[3,1],[3,2],[3,3]];
+	    // 2排2列
+	    var students = [[1,1],[1,2],[2,1],[2,2]];
+	    //console.log(students[0][0]);
+	    // i代表第几个人
+	    for(var i=0; i<students.length; i++) {
+             // students[i] 又是一个数组
+             //console.log(students[i]);
+             for(var j=0; j<students[i].length; j++) {
+             	document.write(students[i][j]);
+             }
+             document.write("<br/>");
+ 	    }
+	</script>
+	
+
 </body>
 </html>
 ```
