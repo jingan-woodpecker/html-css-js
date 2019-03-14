@@ -112,3 +112,84 @@
 </body>
 </html>
 ```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+         // 编写函数  has(arr,44)  判断某个元素是否存在数组中 存在返回true 不存在返回false
+         function has(arr,num) {
+         	 for(var i=0; i<arr.length; i++) {
+         	 	if (arr[i] === num) {
+         	 		return true;
+         	 	}
+         	 }
+         	 return false; // 注意返回false的位置
+         }
+
+         /*var arr = [13,45,23,5,6];
+         alert(has(arr,23)); */
+         // 编写函数 norepeat(arr) 去掉数组中重复的元素 返回新的数组
+         //  [34,12,5,12,56] -----> [34,12,5,56]
+         // 方法一 从头到尾对每一个元素进行判断 不在新数组中就加入新数组
+         function norepeat(arr) {
+         	 var newArr = [];
+         	 //var j = 0;// 从下标为0开始赋值
+         	 for(var i=0, len=arr.length; i<len; i++) {
+         	 	 if (!has(newArr,arr[i])) {
+         	 	 	// 原数组元素不在新数组中就添加
+         	 	 	newArr.push(arr[i]);
+         	 	 	//newArr[j++] = arr[i];
+         	 	 	//newArr[newArr.length] = arr[i];
+         	 	 }
+         	 }
+         	 return newArr;
+         }
+         
+         // 方法二 针对有序的数组 [1,1,2,3,3,24]
+         function norepeat2(arr) {
+            var newArr = [];
+            for(var i=0; i<arr.length; i++) {
+            	if (arr[i] != arr[i+1]) {
+            		newArr.push(arr[i]);
+            	}
+            }
+            return newArr;
+         }
+
+         //var arr = [2,4,56,23,4,2,10];
+         /*var arr = [1,1,2,3,3,24];
+         var res = norepeat2(arr);
+         alert(res);// [2,4,56,23,10]*/
+
+
+         // 假如有个排序好的数组 现在插入一个数 按原来的规律
+         // [6,8,11,13] 9  新数组[6,8,9,11,13]
+         // 找到添加数的下标
+         function fnInsertArr(arr,num) {
+         	 var index = arr.length;  // 记住添加数的下标
+         	 for(var i=0, len=arr.length; i<len; i++) {
+         	 	  if (arr[i]>num) {
+                      index = i;
+                      break;
+         	 	  }
+         	 }
+         	 // 把num插入到index位置处
+         	 arr.splice(index,0,num);
+         	 return arr;  //一定要return，返回值，否则就是undefined
+         }
+
+         var arr = [6,8,11,13];
+         var res = fnInsertArr(arr,10);
+         alert(res);
+         
+	</script>
+</body>
+</html>
+```
