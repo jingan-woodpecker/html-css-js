@@ -80,8 +80,85 @@
         var str = "lmnopq";
         var arr = str.split("");
         var res = arr.reverse().join("");
-        console.log(res); // qponml      
+        console.log(res); // qponml   
+
+
+		var str = "你好 nnd 祝你快乐  nnd 再见";
+	    var newStr = str.replace("nnd","@");
+	    console.log(newStr); // 你好 @ 祝你快乐  nnd 再见
+
+	    // 全局替换
+	    newStr = str.split("nnd").join("@");
+	    console.log(newStr);
+
+	    var str1 = "abbgHGtY";
+	    console.log(str1.toLowerCase());
+	    console.log(str1.toUpperCase());	
+	    console.log(str1);   
 	</script>
+	</script>
+</body>
+</html>
+```
+
+字符串应用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+	   // 统计字符串中小写字母个数 大写字母个数  数字字符个数 其他字符的个数
+	   function fnCount(str) {
+           // 思路 分别对字符串中每个字符进行判断
+           var small = 0;
+           var big = 0;
+           var num = 0;
+           var others = 0;
+           for(var i=0; i<str.length; i++) {
+           	   var ch = str.charAt(i);
+           	   if (ch >= "a" && ch <="z") {
+           	   	    small++;
+           	   } else if (ch >= "A" && ch <="Z") {
+           	   	    big++;
+           	   } else if (ch >= "0" && ch <="9") {
+           	   	    num++;
+           	   } else {
+           	   	    others++;
+           	   }
+           }
+           console.log(small,big,num,others);
+	   }
+
+	   var str = "ahhf323hj5%#$Ab!2Uy";
+	   fnCount(str);
+
+	   // 统计str中出现每一个字符(32~127)的次数
+       function getCharCount(str) {
+            //  
+            for(var code=32; code<=127; code++) {
+            	var ch = String.fromCharCode(code);
+            	var count = 0;
+            	// 对给定的字符串循环
+            	for(var i=0; i<str.length; i++) {
+                   if (str.charAt(i) === ch) {
+                   	   count++;
+                   }
+            	}
+            	// count>0证明有出现
+            	if (count>0) {
+            		console.log("字符"+ch+"出现了"+count+"次");
+            	}
+            }
+       }
+       getCharCount(str);
+
+       // 事件  DOM 
 	</script>
 </body>
 </html>
