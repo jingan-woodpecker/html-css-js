@@ -174,3 +174,40 @@
 </body>
 </html>
 ```
+
+5、JS操作简单样式
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+        .current {
+        	width: 200px;
+        	height: 200px;
+        	background: green;
+        }
+        .mt10 {
+        	margin-top: 10px;
+        }
+	</style>
+</head>
+<body>
+	
+	<div></div>
+	<script type="text/javascript">
+	   // 通过js给div元素设置样式
+	   var oDiv = document.querySelector("div");
+	   // oDiv.style.width = "200px";
+	   // oDiv.style.height = "200px";
+	   // oDiv.style.background = "red";
+	   //oDiv.style.cssText = "width:200px;height:200px;background:red";
+	   // 元素.className 表示类样式
+	   oDiv.className = "current mt10";
+	</script>
+</body>
+</html>
+```
+
