@@ -110,15 +110,16 @@
 	 	as[i].setAttribute("index", i);
 	 	//as[i].index = i; // 给对象动态增加一个属性
 	 	as[i].onclick = function() {
-	 		// 给当前的链接设置样式 其他的去除 ----排他思想
+	 		// 第一轮点击第一个a链接时，给当前的链接设置样式 其他几个的去除 ----排他思想
 	 		// 先清除所有链接样式和让所有的内容div隐藏 
 	 		for(var j=0; j<as.length; j++) {
+			//  className这个就是获取到属性class，只是在javascript中需要写成className
 	 			as[j].className = "";
                 oDivs[j].style.display = "none";
 	 		}
 	 		// 对当前自己设置on样式
 	 		this.className = "on";
-	 		// 让对应的内容显示 0-0  1-1 2-2
+	 		// 获取当前对应索引，然后展示图片内容 0-0  1-1 2-2
 	 		var index = this.getAttribute("index"); // 当前超链接的索引
 	 		//var index = this.index;
 	 		oDivs[index].style.display = "block";
