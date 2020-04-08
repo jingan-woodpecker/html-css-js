@@ -26,4 +26,25 @@ window对象
 常用window对象
 
     弹窗：confirm() prompt() alert()
-    定时器:
+    定时器:setTimeout 每隔一段时间，执行某个函数的操作
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 隔一秒钟显示i的值，时间的单位是毫秒，此例子为匿名函数也是函数
+        var i = 0;
+        window.setTimeout(function(){
+            document.write(i);
+        },1000)
+    </script>
+</body>
+</html>
+```
