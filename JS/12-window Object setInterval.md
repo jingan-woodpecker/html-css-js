@@ -92,7 +92,7 @@
 
         // 将now放进去，后面d就是now
         var text = dateToString(now);
-        alert(test);
+        alert(text);
         // 定义一个函数将日期格式转换成字符串
         // 先传入一个日期对象d
         function dateToString(d) {
@@ -112,9 +112,69 @@
 
             // 注意回车换行拼接字符串需要加个空字符串
             var str = year + "年" + month + "月" + day + "日" + " ";
-            str += h + ":" + m + ":" + s;
+            str += hour + ":" + minutes + ":" + second;
             str += " " + weekArr[d.getDay()];
             return str;     
+        }
+    </script>
+</body>
+</html>
+```
+
+    动态时间获取
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 定义一个p元素用来在页面上放时间 -->
+    <p id="content"></p>
+    <script>
+        var p = document.getElementById("content");
+        // 先获取当前时间----默认值
+        var now = new Date();
+        // 调用函数写入p元素
+        p.innerHTML = dateToString(now);
+
+        // 开启定时器每隔一秒更新一次
+        setInterval(function() {
+            // 前面是刚进去进去页面获取一个默认时间，这里是开启定时器时，再次更新获取当前时间
+            now = new Date();
+            // 再次重新更新写入数据
+            p.innerHTML = dateToString(now);
+        },1000)
+
+        function dateToString(d) {
+            // 定义个数组，获取星期几，第一个下标0写星期日，跟上面0-6，0代表星期日对应
+            var weekArr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+            // 获取年月日
+            var year = d.getFullYear();
+            var month = d.getMonth()+1;
+            // alert(month); 
+            // 注意：因为西方国家定义0-11为12个月份，0表示一月，要想符合中文习惯就加1
+            var day = d.getDate();
+
+            //获取时分秒
+            var hour = twoTwo(d.getHours());
+            var minutes = twoTwo(d.getMinutes());
+            var second = twoTwo(d.getSeconds());
+
+            // 注意回车换行拼接字符串需要加个空字符串
+            var str = year + "年" + month + "月" + day + "日" + " ";
+            str += hour + ":" + minutes + ":" + second;
+            str += " " + weekArr[d.getDay()];
+            return str;     
+        }
+
+        // 定义一个函数，当时间：（秒）为个位数时就前面加个0，大于等于10就不加
+        function twoTwo(num) {
+            // 注意需要返回return 
+            return num<10?"0"+num:num;
         }
     </script>
 </body>
