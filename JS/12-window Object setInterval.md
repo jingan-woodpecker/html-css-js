@@ -243,6 +243,80 @@
 </html>
 ```
 
+    设置日期效果(setDate()设置某个月的某天，setMonth()设置某一个月，setYear()设置某年)
+    例如：会员到某天过期
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var d = new Date();
+        // 设置日期:比如设置当期日期后十天过期
+        // 如果当前是28号加上10，不会变成38号，系统会自动转换到下一个月
+        d.setDate(d.getDate()+10);
+        alert(d);
+    </script>
+</body>
+</html>
+```
+
+应用
+
+    数码时钟（使用定时器每隔一秒更新时间，然后获取当前时间，最后替换图片路径）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div">
+        <img src="images/0shuma.png" alt="">
+        <img src="images/1shuma.png" alt="">时
+        <img src="images/2shuma.png" alt="">
+        <img src="images/3shuma.png" alt="">分
+        <img src="images/4shuma.png" alt="">
+        <img src="images/5shuma.png" alt="">秒
+    </div>
+    <script>
+        var imgs = document.getElementsByTagName("img");
+        function getTime() {
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var arr = [parseInt(h/10),h%10,parseInt(m/10),m%10,parseInt(s/10),s%10];
+            
+            for(var i=0; i<arr.length; i++) {
+                imgs[i].src = "images/"+arr[i]+"shuma.png";
+            }
+        }
+        
+        // 在定时器没有工作之前，先调用一次函数，防止默认展示的图片展示1秒后才获取到当前时间
+        getTime();
+        // 开启定时器，保证每秒更新一次可以获取到不同的图片路径
+        setInterval(getTime, 1000);
+    </script>
+</body>
+</html>
+```
+
+
+
+
+
+
 
 
     
