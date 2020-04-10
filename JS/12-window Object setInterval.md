@@ -181,4 +181,68 @@
 </html>
 ```
 
+    倒计时效果（实际就是时间差）
+    先取到目标时间、当前时间然后得到时间差，然后进行转换为时分秒等
+    例如：距离五月一号多少天多少时多少分多少秒，一般不考虑月份，因为月份比较复杂
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 定义标签放时间 -->
+    <div>
+        <span>0</span>天<span>0</span>时<span>0</span>分<span>0</span>秒
+    </div>
+    <script>
+        // 找到所有span元素进行后面赋值
+        var spans = document.getElementsByTagName("span");
+
+        // 距离端午节多少天多少时多少分多少秒
+        // new一个对象获取目标时间,下面定义的时分秒默认0:0:0，可以不写
+        var end = new Date("2020-5-1 0:0:0");
+        // 获取当前时间
+        var now = new Date();
+
+        // 开启定时器每隔一秒计算一次
+        setInterval(function() {
+            var now = new Date();  // 默认值
+            ss = diff(now,end); //调用函数计算时间差
+            // document.write(ss + "<br>");
+            // 转换为剩余的天、时分秒
+            var _d = parseInt(ss/(24*3600));
+            var _h = parseInt(ss%(24*3600)/3600);
+            var _m = parseInt((ss%3600)/60);
+            var _s = parseInt(ss%60);
+
+            // 将上面转化的值赋值
+            spans[0].innerHTML = twoTwo(_d);
+            spans[1].innerHTML = twoTwo(_h);
+            spans[2].innerHTML = twoTwo(_m);
+            spans[3].innerHTML = twoTwo(_s);
+
+        },1000);
+
+        // 定义一个函数，获取时间差的毫秒数，然后除以1000获取秒数
+        function diff(start,end) {
+            // getTime() 是获取从1970-1-1到当前时间的毫秒数
+            return (end.getTime() - start.getTime())/1000;
+        }
+
+        // 防止秒数出现一位数，导致样式变化定义一个函数
+        function twoTwo(num) {
+            // 注意：一定要添加return
+            return num<10?"0"+num:num;
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
     
