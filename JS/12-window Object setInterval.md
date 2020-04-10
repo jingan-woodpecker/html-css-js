@@ -1,5 +1,6 @@
 一、window对象setInterval异步定时器
 
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +38,14 @@
 </html>
 ```
 
+
 二、应用
 
     常用：轮播图、倒计时
     使用定时器前先学习日期对象
 
     日期对象
+
 
 ```html
 <!DOCTYPE html>
@@ -73,6 +76,7 @@
 </body>
 </html>
 ```
+
 
 ```html
 <!DOCTYPE html>
@@ -119,9 +123,11 @@
     </script>
 </body>
 </html>
+
 ```
 
     动态时间获取
+
 
 ```html
 <!DOCTYPE html>
@@ -181,9 +187,11 @@
 </html>
 ```
 
+
     倒计时效果（实际就是时间差）
     先取到目标时间、当前时间然后得到时间差，然后进行转换为时分秒等
     例如：距离五月一号多少天多少时多少分多少秒，一般不考虑月份，因为月份比较复杂
+
 
 ```html
 <!DOCTYPE html>
@@ -243,8 +251,10 @@
 </html>
 ```
 
+
     设置日期效果(setDate()设置某个月的某天，setMonth()设置某一个月，setYear()设置某年)
     例如：会员到某天过期
+
 
 ```html
 <!DOCTYPE html>
@@ -267,9 +277,11 @@
 </html>
 ```
 
+
 应用
 
     数码时钟（使用定时器每隔一秒更新时间，然后获取当前时间，最后替换图片路径）
+
 
 ```html
 <!DOCTYPE html>
