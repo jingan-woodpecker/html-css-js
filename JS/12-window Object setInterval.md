@@ -324,6 +324,40 @@
 </html>
 ```
 
+轮播图
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="img/6.jpg" alt="">
+	<script>
+		var imgs = document.getElementsByTagName("img")[0];
+		var imgArr = ["6.jpg","7.jpg","8.jpg","9(1).jpg"]
+		var index = 0;
+		setInterval(function() {
+			// 如果不是顺序播放使用Math.random
+			index++;
+			// 临界值的判断
+			if(index == imgArr.length) {
+				index = 0;
+			}
+			
+			imgs.src = "img/"+imgArr[index];
+		}, 1000);
+
+	</script>
+</body>
+</html>
+```
+
+
+
+
 
 
 
