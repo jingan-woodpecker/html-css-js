@@ -355,6 +355,56 @@
 </html>
 ```
 
+勾股定理
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="num1">+
+    <input type="text" id="num2">=
+    <input type="text" id="num3">
+    <script>
+        // Math.sqrt(a*a + b*b) a的平方+b的平方
+        // 封装一个函数找元素
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        // 键盘弹起事件
+        $("num1").onkeyup = function() {
+            // 获取input输入框的值用value，获文本的值用innerHTML
+            var v1 = $("num1").value;
+            var v2 = $("num2").value;
+
+            // 非空判断
+            if(v1=="" ||  v2=="") {
+                $("num3").value = "必须是两个数字";
+                // return;  注意添加返回
+                return;
+            }
+            if(isNaN(v1) || isNaN(v2)) {
+                $("num3").value = "必须两个都是数字";
+                return;
+            }
+            $("num3").value = Math.sqrt(Math.pow(v1,2) + Math.pow(v2,2));
+        }
+
+        $("num2").onkeyup = function() {
+            // 输入框2，键盘弹起时执行输入框1的事件处理函数
+            $("num1").onkeyup();   // 这是方法后面加括号，上面的是属性
+        }
+    </script>
+</body>
+</html>
+```
+
 
 
 
