@@ -188,6 +188,124 @@
     字体图标网址：https://fontawesome.dashgame.com/  下载 解压
     查看网站如何使用字体图标
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="font-awsome/font-awesome-4.7.0/css/font-awesome.css">
+</head>
+    <style>
+        div {
+            top: 0;
+            left: 0;
+            color: green;
+            font-size: 20px;    
+            position: absolute;
+        }
+    </style>
+<body>
+    <div class="fa fa-leaf" style="left:340px;top:172px"></div>
+    <div class="fa fa-leaf" style="left:172px;top:340px"></div>
+    <div class="fa fa-leaf" style="left:69px;top:272px"></div>
+    <div class="fa fa-leaf" style="left:69px;top:272px"></div>
+    <div class="fa fa-leaf" style="left:75px;top:275px"></div>
+    <div class="fa fa-leaf" style="left:77px;top:275px"></div>
+    <div class="fa fa-leaf" style="left:83px;top:290px"></div>
+    <div class="fa fa-leaf" style="left:340px;top:172px"></div>
+    <div class="fa fa-leaf" style="left:85px;top:335px"></div>
+    <div class="fa fa-leaf" style="left:85px;top:428px"></div>
+    <div class="fa fa-leaf" style="left:75px;top:508px"></div>
+    <div class="fa fa-leaf" style="left:78px;top:172px"></div>
+    <script> 
+        var divs = document.querySelectorAll("div");
+        // 这里是在文档的任意位置都可以触发事件，而不仅仅是在div盒子中
+        // 所以是document.onmousemove 而不是divs.onmousemove
+        document.onmousemove = function(e) {
+            var e = e || event;
+            // 设置第一个叶子的位置是鼠标位置
+            divs[0].style.left = e.pageX + "px";
+            divs[0].style.top = e.pageY + "px";
+            for(var i=divs.length-1; i>0; i--) {
+                divs[i].style.left = divs[i-1].style.left;
+                divs[i].style.top = divs[i-1].style.top;
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+键盘事件
+
+        键盘按键值的问题
+        onkeydown键盘按下、 onkeyup键盘弹起、 onkeyperss键盘按下过程中
+
+        e.keyCode 表示按下不同按键返回不同值的属性（注意：无论大小写字母都是一样按照大写的ASCII值，也就是说
+        按下A和a的按键的值是一样的，都是65）
+
+        封装的特殊属性，主要是ctrl这样的控制键
+        例如ctrlKey属性：表示有没有按下ctrl键——》如果有返回true，没有返回false
+        altKey、shiftKey等属性 ：表示有没有按下alt键
+
+        还可以使用的场景：比如在键盘按下A就在网页显示酷炫字体A等
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.onkeydown = function(e) {
+            var e = e || event;
+            // e.keyCode属性，表示按下不同的键，键盘值是不一样的
+            // console.log(e.keyCode);
+            console.log(e.ctrlKey);
+        }
+    </script>
+</body>
+</html>
+```
+
+应用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.onkeypress = function(e) {
+            var e = e || event;
+            console.log(e.keyCode);
+            // ctrl——》13 和ctrl+enter——》10 按下ctrl或者ctrl+enter同时按下发送消息
+            // 但是按下shift+enter也是13
+
+            // 必须按下ctrl+enter才能发送消息
+            if (e.ctrlKey && e.keyCode == 10) {
+                alert("发送");
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+
 
 
 
