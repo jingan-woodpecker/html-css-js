@@ -490,7 +490,7 @@
 
         btn.onclick = function(e) {
             // 阻止冒泡
-            e.stopPropagation?e.stopPropagation():e.cancelBubble;
+            e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
             getUl.style.display = "block";
         }
 
@@ -503,11 +503,46 @@
 </html>
 ```
 
+阻止浏览器的默认行为
 
+    例如：链接，当点击链接后就跳转，这就是浏览器的默认行为
+    当需要点击这个链接做其它事情（弹窗）就是阻止了默认行为
 
+    阻止默认行为的方式：
+    1、加上return false; （常用）
+    2、e.preventDefault();适用于高版本浏览器
+    3、e.returnValue = false;适用于低版本浏览器
 
+    兼容处理：先判断是否有这个方法,有就调用
+    e.preventDefault?e.preventDefault():e.returnValue = false;
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <a href="http://www.163.com">网易</a>
+    <script>
+        var alink = document.querySelector("a");
+        alink.onclick = function() {
+            alert("success");
+            // 要想点击a链接执行弹窗事件后不再默认跳转到网易页
+            return false;  // 阻止默认行为
+        }
+    </script>
+</body>
+</html>
+```
 
+应用
 
+    整个文档中右击鼠标出来图片，本身默认行为是右击鼠标出来菜单
+    oncontextmenu鼠标右击事件
 
 
