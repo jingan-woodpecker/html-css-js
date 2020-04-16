@@ -305,6 +305,208 @@
 </html>
 ```
 
+事件冒泡
+
+    所有事件当中，如果没有阻止事件冒泡，执行当中的某一个事件后，会自动冒泡往上继续执行其它事件
+    事件执行冒泡顺序：body元素、body、document、window
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .fa {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+<body>
+    <div class="fa">
+        <div class="son"></div>
+    </div>
+    <script>
+            // querySelector 高版本才支持
+            var fa = document.querySelector(".fa");
+            var son = document.querySelector(".son");
+            // 给父亲和儿子元素、document都绑定事件
+            // 然后执行程序点击儿子盒子发现先执行son事件，然后接着自动执行fa事件
+            fa.onclick = function() {
+                alert("fa");
+            }
+
+            son.onclick = function() {
+                alert("son");s
+            }
+
+            document.onclick = function() {
+                alert("document");
+            }
+
+            window.onclick = function() {
+                alert("window");
+            }
+    </script>
+</body>
+</html>
+```
+
+    浏览器默认行为阻止事件冒泡
+    （1）e.stopPropagation();  此方法IE浏览器不支持
+    （2）e.cancelBubble = true 此属性支持IE浏览器，默认是false，为true时表示阻止冒泡
+
+    兼容检测：先查找这个对象是否有这个属性(e.stopPropagation)，如果有就调用此方法[e.stopPropagation()]
+    如果不支持就用这个属性并把值设置成true(e.cancelBubble = true)
+
+    至于需不需要用到阻止冒泡，具体看业务逻辑
+
+    ```html
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .fa {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+<body>
+    <div class="fa">
+        <div class="son"></div>
+    </div>
+    <script>
+            // IE8以上才支持querySelector
+            var fa = document.querySelector(".fa");
+            var son = document.querySelector(".son");
+            // 给父亲和儿子元素、document都绑定事件
+            // 然后执行程序点击儿子盒子发现先执行son事件，然后接着自动执行fa事件
+            fa.onclick = function() {
+                alert("fa");
+            }
+
+            son.onclick = function() {
+                alert("son");s
+            }
+
+            document.onclick = function(e) {
+                // 阻止冒泡,执行完document这个事件就不会再往下执行了
+                // e.stopPropagation();  兼容处理
+                // e.cancelBubble 这个属性支持IE
+                e.stopPropagation?e.stopPropagation():e.cancelBubble = true;
+                alert("document");
+            }
+
+            window.onclick = function() {
+                alert("window");
+            }
+    </script>
+</body>
+</html>
+```
+
+应用
+
+    弹出个人信息：点击按钮显示个人信息列表，点击文档其它位置就隐藏列表
+    下面的第一个例子效果是：点击按钮后列表隐藏了，点击其它位置无反应，原因是执行完点击按钮事件后
+    紧接着事件冒泡，执行document事件把列表给隐藏了，所以需要阻止冒泡事件
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>显示个人信息</button>
+    <ul>
+        <li>姓名：珍珍</li>
+        <li>年龄：24</li>
+        <li>性别：女</li>
+    </ul>
+    <script>
+        var btn = document.getElementsByTagName("button")[0];
+        var getUl = document.getElementsByTagName("ul")[0];
+
+        btn.onclick = function() {
+            getUl.style.display = "block";
+        }
+
+        // 点击文档的其它位置隐藏列表，所以绑定document
+        document.onclick = function() {
+            getUl.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+```
+
+    阻止冒泡
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>显示个人信息</button>
+    <ul>
+        <li>姓名：珍珍</li>
+        <li>年龄：24</li>
+        <li>性别：女</li>
+    </ul>
+    <script>
+        var btn = document.getElementsByTagName("button")[0];
+        var getUl = document.getElementsByTagName("ul")[0];
+
+        btn.onclick = function(e) {
+            // 阻止冒泡
+            e.stopPropagation?e.stopPropagation():e.cancelBubble;
+            getUl.style.display = "block";
+        }
+
+        // 点击文档的其它位置隐藏列表，所以绑定document
+        document.onclick = function() {
+            getUl.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+
+
 
 
 
