@@ -268,4 +268,229 @@
 ```
 
 
+事件传播完整机制经历的阶段
+
+    分为三个阶段：
+    先从左边，最外面的widonw开始往下找，这个第一阶段叫“捕获”阶段
+    接下来第二个阶段为：目标阶段（比如找到fa）
+    然后从左边往上开始冒泡，这个第三阶段叫“冒泡”阶段
+
+    window         window         
+    document       document
+    html           html
+    body           body
+    fa             fa
+    son            son
+
+    DOM0级事件绑定的方法都是在当前元素事件行为的冒泡阶段执行
+    通俗来讲就是，当你点击fa元素，fa元素先出来，就是第一个找到目标先出来，然后往上冒泡执行
+
+DOM0级应用
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .fa {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+
+        .fa .son {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+    </style>
+<body>
+    <div class="fa">
+        <div class="son"></div>
+    </div>
+    <script>
+        // querySelector里面是填写类名
+        var fa = document.querySelector(".fa");
+        var son = document.querySelector(".son");
+        window.onclick = function() {
+            console.log("window");
+        }
+        
+        document.onclick = function() {
+            console.log("document");
+        }
+
+        // documentElement表示html
+         document.documentElement.onclick = function() {
+            console.log("html");
+        }
+
+        document.body.onclick = function() {
+            console.log("body");
+        }
+
+        fa.onclick = function() {
+            console.log("fa");
+        }
+
+        son.onclick = function() {
+            console.log("son");  
+        }
+    </script>
+</body>
+</html>
+```
+
+DOM2级绑定事件
+
+    addEventListener(event,listener,useCapture)  
+    注意：event事件名称——》例如DOM0级用onclick,在DOM2级用click即可
+          useCapture默认是false
+
+    addEventListener(事件名称,事件回调函数,是否捕获)
+    要想显示先捕获则把useCapture设置为true
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .fa {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+
+        .fa .son {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+    </style>
+<body>
+    <div class="fa">
+        <div class="son"></div>
+    </div>
+    <script>
+        var fa = document.querySelector(".fa");
+
+        window.addEventListener("click",function() {
+            console.log("window 捕获");
+        },true);
+
+        window.addEventListener("click",function() {
+            console.log("window 冒泡");
+        },false);
+
+        document.addEventListener("click",function() {
+            console.log("document 捕获");
+        },true);
+
+        document.addEventListener("click",function() {
+            console.log("document 冒泡");
+        },false);
+
+        document.body.addEventListener("click",function() {
+            console.log("body 捕获");
+        },true);
+
+        document.body.addEventListener("click",function() {
+            console.log("body 冒泡");
+        },false);
+
+        fa.addEventListener("click",function() {
+            console.log("fa 捕获");
+        },true);
+
+        fa.addEventListener("click",function() {
+            console.log("fa 冒泡");
+        },false);
+    </script>
+</body>
+</html>
+```
+
+
+    捕获作为了解，主要是冒泡
+
+    操作触发某一个用户的行为
+    例如：点击fa元素，执行了这个事件方法，此时浏览器会把存储的对象，传给每一个执行的方法
+    点击fa元素，这个封装的对象就跟fa相关，然后冒泡，就会把fa相关的事件对象继续传递
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        .fa {
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+        }
+
+        .fa .son {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+    </style>
+<body>
+    <div class="fa">
+        <div class="son"></div>
+    </div>
+    <script>
+        var fa = document.querySelector(".fa");
+
+        window.addEventListener("click",function(e) {
+            console.log(e == myEvent);
+        },false);
+
+        document.addEventListener("click",function(e) {
+            console.log(e == myEvent);
+        },false);
+
+        document.body.addEventListener("click",function(e) {
+            console.log(e == myEvent);
+        },false);
+
+        fa.addEventListener("click",function(e) {
+            console.log("fa 冒泡");
+            myEvent = e;
+        },false);
+    </script>
+</body>
+</html>
+```
+
+IE高版本完整机制
+
+    window html body
+
+IE低版本完整机制
+
+    html body
+
+谷歌完整机制
+
+    window document html body fa son
+
+
 
