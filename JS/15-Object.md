@@ -173,7 +173,176 @@ JS基本类型和对象类型（JS中可以一切看做对象）
 </html>
 ```
 
-数据交换格式json
+数据交换格式json：标准的数据交换格式
+
+    前端和后端进行数据通信，后台会传给前端数据，前端获取展示，所以数据需要遵循一定的格式
+    主流格式json，以前xml
+
+    json格式和普通对象格式对比
+    json数据格式，属性**必须用双引号**引起来  {"name":"lisi"}
+    普通对象格式，属性可以使用双引号引起来，也可以不用 {name:"lisi"}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	   // json 一种标准的数据交换格式 属性必须用双引号引起来
+	   var lisi = {
+           "stuName": "lisi", // 属性 属性名:属性值
+           "stuAge": 20,
+           "stuHeight": "178cm",
+           "stuTel": "18866666666",
+           // 行为 
+           "study": function() {
+           		alert("good good study day day up");
+           },
+           "eat": function() {
+           	    alert("吃货一枚!!!");
+           }
+       };
+
+       // json数据访问跟对象访问属性一致
+       alert(lisi.stuAge);
+       // 调用方法也是一致的，不用跟上面一样再加个alert
+       lisi.study()
+	</script>
+</body>
+</html>
+```
+
+
+for in 循环
+
+    对对象或者json都起作用
+
+
+```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+        // json 一种标准的数据交换格式 属性必须用双引号引起来
+        var lisi = {
+            "stuName": "lisi", // 属性 属性名:属性值
+            "stuAge": 20,
+            "stuHeight": "178cm",
+            "stuTel": "18866666666",
+            // 行为 
+            "study": function() {
+                    alert("good good study day day up");
+            },
+            "eat": function() {
+                    alert("吃货一枚!!!");
+            }
+        };
+
+        // json数据访问属性的两种方式
+        // 第一种：跟对象访问属性一致；第二种：对象["属性名"]，注意属性名加双引号，否则表示变量
+        alert(lisi.stuAge);
+        alert(lisi["stuHeight"]);
+        // 调用方法也是一致的，不用跟上面一样再加个alert
+        lisi.study();
+
+
+        /*
+           对象["属性名"] === 对象.属性名
+           对象[变量] 不能这样如对象.变量 假如这样写表示对象的有个属性名是这个变量名
+       */
+        for(var k in lisi) {
+            // k代表每一个属性(属性名:属性值)
+            // lisi[k] 代表属性k对应的属性值
+            console.log(k + ":" + lisi[k]);
+        }
+        </script>
+    </body>
+    </html>
+```
+
+
+对象获取
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 打印所有的路径和文字描述即打印所有数据
+        var json = {
+            "url":["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"],
+            "desc":["图片一","图片二","图片三","图片四","图片五"]
+        }
+
+        
+        for (var k in json) {
+            // json[k]代表json数据中的某一个属性的值
+            // json[k][i]中的[i]表示下标
+            for (var i=0; i<json[k].length; i++) {
+                console.log(json[k][i]);
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul></ul>
+    <script>
+        // 定义一种数据结构，存储四个用户信息
+        // 四个用户可以用数组存储，每个用户可以用json格式表示
+        var users = [{
+            "uname":"user1",
+            "pswd":"123"
+        },{
+            "uname":"user2",
+            "pswd":"456"
+        },{
+            "uname":"user3",
+            "pswd":"789"
+        },{
+            "uname":"user4",
+            "pswd":"101"
+        }];
+
+        // 把用户显示在ul列表中
+        var getUl = document.querySelector("ul");
+        for (var i=0; i<users.length; i++) {
+            var createLi = document.createElement("li");
+            // users[0] 下标为0的数据，users[i].name下标为0里面uname的值
+            createLi.innerHTML = "用户名" + users[i].uname + "密码是" + users[i].pswd;
+            getUl.appendChild(createLi);
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
 
 
 
