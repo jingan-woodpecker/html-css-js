@@ -341,6 +341,89 @@ for in 循环
 </html>
 ```
 
+        计算器练习省略
+
+总结
+
+    js关于dom操作
+      找元素
+            document.querySelector()
+            document.querySelectorAll() 
+            document.getElementById()    浏览器都兼容，但只能在document中使用
+            document.getElementByTagName() 注意返回的是列表，需要加上[]
+            document.getElementsByClassName() ie9+可以使用
+            document.getElementsByName()  ie中只对表单元素name中
+            
+            6个方法
+            document.documentElement  获取html
+            document.body 获取body
+            document.head 获取head
+    属性    childNodes/children /firstChild/lastChild/nextSibling/previousSibling 
+
+
+client、offset、scroll三大家族（常用于特效）
+
+       width/height/left/top
+       offsetParent
+
+    (1)clientWidth = width + 左右padding
+       clientHeight = height + 上下padding
+       clientWidth 为可视区域的宽度   width + 左右pdding与内容是否溢出无关
+
+       主要应用于：当点击页面按钮弹出一个框需要水平居中、垂直居中
+       先得到整个屏幕的可视区域宽度，减去自己盒子的宽度然后除以2 
+
+       clientTop 上边框的宽度  clientLeft 左边框的宽度  没有clientRight
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 200px;
+        height: 210px;
+        padding: 15px;
+        border: 10px  solid skyblue;
+        margin: 50px;
+    }
+    </style>
+<body>
+    <div class="box" id="box">
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+        案发时放点方式的噶的噶多少个但是还是申购赎回
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>
+```
+
+![clientWidth](../picture/clientWidth.png)
+![clientHeight](../picture/clientHeight.png)
+
+
+    offsetWidth 左右border+左右padding+width
+    ......Height .... 上下border+上下padding+height
+
+![offsetHeight](../picture/offsetWidth.png)
+
+    这两个值是有误差的
+    scrollWidth  左padding+内容真实的宽度（包含溢出内容）
+    ......Height 上padding+内容真实的高度（包含溢出内容）
+
+
 
 
 
