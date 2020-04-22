@@ -109,7 +109,7 @@
 ```
 
 
-    3 json与js狭义对象区别
+    3 json与js狭义对象的比较
 
         var p1 = {
             "name":"along",
@@ -141,8 +141,193 @@
         console.log(obj["~~"]);  
     </script>
 </body>
-
 </html>
 ```
 
-    
+    对象中的方法
+
+        在对象里定义函数就叫对象中的方法
+        调用的两种方式如下实例：
+        一、对象名.方法() ——》 xiaohong.say();
+        二、定义变量接收，但是不要加小括号，否则传入的是函数的值而不是函数 ——》var fn = xiaohong.say
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xiaohong = {
+            name: "小红",
+            age: 18,
+            hobby: ["coding","eating"],
+            say:function() {
+                console.log("嗓子好");
+            }     
+         };
+         xiaohong.say(); // 对象名.方法()
+         var fn = xiaohong.say; //不用加小括号，加了括号表示传入函数值，不是函数
+         fn();
+    </script>
+</body>
+</html>
+```
+
+函数的上下文
+
+    指的就是搞清楚this代表谁
+
+    第一种：函数假如是圆括号执行 函数的上下文就是window
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 判断this代表谁
+        var a = 100;
+        function fn(a,b,c,d,e,f) {
+            var a = 200;
+            // 谁调用this就是谁，这里是window调用，所以是window.a
+            console.log(this.a); 
+        }
+
+        fn(1,4,5,22,53,24); // 直接函数调用，相当于window调用即：window.fn()
+        // 全局定义的变量或者函数都会在window上映射，可以在控制台输入window查看下
+        console.log(window);
+    </script>
+</body>
+</html>
+```
+
+    第二种：函数作为事件处理函数，就是执行操作后才触发， 那么函数上下文就是这个事件触发的对象
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 10px;
+            background-color: pink;
+        }
+    </style>
+</head>
+    <div></div>
+    <div></div>
+    <div></div>
+<body>
+    <script>
+        // 封装一个函数，改变当前背景为红色
+        // 事件发生后才调用这个函数，所以这个this代表的是事件源
+        function changeColor() {
+            this.style.background = "red";
+        }
+
+        var divs = document.querySelectorAll("div");
+        for(var i=0; i<divs.length; i++) {
+            // 这里注意调用changeColor不要添加括号，否则变成调用函数返回值，不是函数了
+            divs[i].onclick = changeColor;
+        }
+    </script>
+</body>
+</html>
+```
+
+    第三种：函数作为对象的方法 对象打点调用 那么函数上下文是这个对象
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function say() {
+            name = "xiaohang";
+            console.log(this.name);
+        }
+
+        var obj = {
+            name : "xiaojun",
+            age : 28,
+            sex : "女",
+            say : say
+        }
+        
+        // 谁调用this指的就是谁，这里是obj调用，所以调用的name是obj对象里的name
+        obj.say(); 
+    </script>
+</body>
+</html>
+```
+
+    第四种 定时器函数上下文是window 需要改成事件源则在定时器外面将this用变量先存储
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+    <div></div>
+    <div></div>
+    <div></div>
+<body>
+    <script>
+        // 定时器函数上下文默认是window,想要解决这种问题且不使用div[0]这种方式
+        // 因为在定时器外面的this是事件源，所以可以用一个变量先存储
+        var divs = document.querySelectorAll("div");
+        divs[0].onclick = function() {
+            var _this = this;  // 这个this表示事件源
+            setInterval (function() {
+                /* 
+                定时器里直接使用this是无效的,不是当前事件源，是window
+                this.style.background = "green";
+                可以使用divs[0].this.style.background
+                */
+                _this.style.background = "green";
+            },1000)
+            
+
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
+
