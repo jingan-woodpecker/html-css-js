@@ -476,6 +476,250 @@ arguments类数组对象：本质上是对象，长的像数组
 </html>
 ```
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn1(a,b,c,d,e,f,g) {
+            console.log(this);
+            alert(this.callee.length);
+        }
+
+        function fn2(a,b,c,d,e) {
+            // arguments[fn1,3,4]  
+            // 函数作为数组元素 被索引出来执行 函数上下文是这个数组
+            arguments[0](3,4,2,5,3);
+        }
+
+        fn2(fn1,3,4);
+
+    </script>
+</body>
+</html>
+```
+
+练习
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+        var x = 10;
+        function fn(m,n,x) {
+            alert(x);
+            arguments[2] = 20;
+            alert(x);
+        }
+        // 因为上面函数没有返回值，所以默认是undefined
+        x = fn(1,2,3);
+        alert(x);
+    </script>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        /*
+           fun2->f
+           2->a
+           4->b
+           6->c
+           这些参数也会在arguments存储一份所以8,10在arguments中接收
+           fun的arguments [fun2,2,4,6,8,10]
+        
+        */   
+        function fun(f,a,b,c) {
+            // 被数组索引出来fn2
+            arguments[0](5,8);
+        }
+
+        function fun2(i,j,k,l,m) {
+            // this代表函数所在的数组 fun的arguments
+            alert(this.length);  // 6
+            alert(this.callee.length); // 4
+            alert(arguments.length);  // 2
+            alert(arguments.callee.length);  // 5 形参个数
+        }
+
+        fun(fun2,2,4,6,8,10)
+    </script>
+</body>
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        var c = 100;
+        var obj = {
+            "a" : function() {
+                return this.b;
+            },
+            "b" : function() {
+                return this.c;
+            },
+            "c" : 10
+        }
+
+        var res = obj.a()();
+        alert(res);
+        /*
+            首先obj.a()的调用，因为是对象打点调用所以this相当于obj
+            返回的obj.b ==== funciton() {
+                return this.c;
+            }
+
+            最后obj.b()调用就是上面的函数调用 (function() {
+                return this.c;
+            })()
+            这种形式的调用为window.c调用，结果res = 100
+        */
+    </script>
+</body>
+</html>
+```
+
+apply和call方法
+
+    改变函数this属性指向
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // this arguments都是属性  方法apply call
+        // 未用apply call 方法时，this指向不会改变，所以this不等于obj
+        function sum(a,b,c,d) {
+            console.log(a+b+c+d); // 10
+            console.log(this === obj) // false
+        }
+
+        var obj = {
+            name : "xiaoli",
+            age : 39,
+            sex : "女"
+        }
+
+        // sum() 函数名带括号直接调用this代表window
+        sum(1,2,3,4)
+    </script>
+</body>
+</html>
+```
+
+    call方法使用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // this arguments都是属性  方法apply call
+        // 未用apply call 方法时，this指向不会改变
+        function sum(a,b,c,d) {
+            console.log(a+b+c+d); // 10
+            console.log(this === obj) // true
+        }
+
+        var obj = {
+            name : "xiaoli",
+            age : 39,
+            sex : "女"
+        }
+        // sum() 函数名带括号直接调用this代表window
+        // call()也可以调用函数，它的参数除了接受实际参数外，第一个参数还可以代表this
+        // 比如想让this和obj相等，如下调用即可,此时obj === this
+        sum.call(obj,1,2,3,4)
+    </script>
+</body>
+</html>
+```
+
+    apply基本功能与call一样 区别在于传递参数语法不一样，实参需要放在数组里面
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // this arguments都是属性  方法apply call
+        // 未用apply call 方法时，this指向不会改变
+        function sum(a,b,c,d) {
+            console.log(a+b+c+d); // 10
+            console.log(this === obj) // true
+        }
+
+        var obj = {
+            name : "xiaoli",
+            age : 39,
+            sex : "女"
+        }
+        // sum() 函数名带括号直接调用this代表window
+        // apply()也可以调用函数，基本功能与call一样 区别在于传递参数语法不一样，实参需要放在数组里面
+        // 比如想让this和obj相等，如下调用即可,此时obj === this
+        sum.apply(obj,[1,2,3,4])
+
+        // Math对象中min求最小值的方法  加上window改变内部指向
+        alert(Math.min.apply(window,[10,-4,11,0,9]));
+    </script>
+</body>
+</html>
+```
+
+    
+
+
 
 
 
