@@ -328,6 +328,156 @@
 </html>
 ```
 
+    第五种：函数作为数组元素 被索引出来执行 函数上下文是这个数组
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn() {
+            console.log(this.length);
+        }
+
+        arr = [fn,3,5,33,11];
+        // 调用数组中的函数
+        arr[0]();
+    </script>
+</body>
+</html>
+```
+
+arguments类数组对象：本质上是对象，长的像数组
+
+    callee 指的是函数本身
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getSum(a,b,c,d,e) {
+            console.log(arguments.length); // 实参个数
+            // callee 指的是函数本身
+            console.log(arguments.callee.length); // 形参个数
+            console.log(getSum.length); // 形参个数
+            console.log(typeof arguments); //arguments是对象
+            console.dir(arguments) // 查看详情信息
+        }
+
+        getSum(1,2,3);
+    </script>
+</body>
+</html>
+```
+
+应用
+
+
+        预解析做的事情：变量声明提升只提升变量，赋值不提升；
+        带function的声明和赋值同时提升
+        
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            下面的代码从上往下执行，先提升var a，然后提升function fn()，暂时不会提升
+            fn()函数里的a,因为此时还没有调用执行，所以有如下结果
+
+            var a;
+            function fn() {
+                console.log(a);
+                var a = 20;
+            }
+
+            到这里预解析就结束了，代码就等价于如下这样
+
+            var a;
+            function fn() {
+                console.log(a);
+                var a = 20;
+            }
+
+            console.log(a);  // 变量定义了还没赋值，所以是undefined
+            a = 10;
+            fn(); // 调用这个函数，会形成私有作用域，执行代码前也会做变量提升，所以这个也是undefined
+            console.log(a); // 这个a使用的是全局变量，所以为10  
+        
+
+        */
+        console.log(a);
+        var a = 10;
+        function fn() {
+            console.log(a);
+            var a = 20;
+        }
+
+        fn();
+        console.log(a);
+
+
+    </script>
+</body>
+</html>
+```
+
+    函数上下文练习
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn() {
+            alert(this.a);
+        }
+
+        var obj = {
+            "a" : 1,
+            "b" : 2,
+            "c" : [{
+                "a" : 3,
+                "b" : 4,
+                "c" : fn
+            }]
+        }
+
+        var a = 6;
+        // obj.c[0]找到这个对象，函数打点调用，谁调用就是谁
+        obj.c[0].c();  //a的值等于3
+    </script>
+</body>
+</html>
+```
+
+
+
 
 
 
