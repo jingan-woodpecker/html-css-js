@@ -636,6 +636,62 @@
 </html>
 ```
 
+    内置构造函数
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: "lily",
+            age: 20,
+            sex: "女"
+        };
+        console.log(obj); // Object的实例
+        console.log(Object.prototype===obj.__proto__);// true
+        /*
+        var obj2 = new Object();
+        obj2.name = "lily";
+        obj2.age = 20;
+        obj2.sex = "女";
+        console.log(obj2);
+        */
+
+        /*          prototype
+            Object--------------Object.prototype
+             |                          |
+             | new                      | 
+             |                          |
+            obj ------------------------
+                       __proto__     
+        */
+
+        /* 内置构造函数Function
+        function fn() {
+            console.log(1); 
+        }
+        fn();
+        // fn函数是Function实例
+        console.log(fn.__proto__ === Function.prototype);
+        */
+        var fn = new Function("a","b","console.log(a+b)");
+        fn(1,4);
+        console.log(fn.__proto__ === Function.prototype);
+        
+        
+    </script>
+</body>
+</html>
+```
+
+
 
 
 
