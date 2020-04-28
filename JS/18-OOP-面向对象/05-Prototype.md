@@ -330,5 +330,312 @@
 </html>
 ```
 
+    小女孩跨过终点就消失
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    <style>
+        div {
+            width: 79px;
+            height: 108px;
+            background: url(images/aisidier.png) 0px -216px;
+        }
+
+        hr {
+            width: 1px;
+            height: 860px;
+            position: absolute;
+            left: 1000px;
+            background: skyblue;
+        }
+    </style>
+<body>
+    <hr>
+    <!-- 引入underscore-min.js使用random获取随机整数 -->
+    <!-- <script src="https://D:/Git-rep/test/min.js"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script> -->
+    <script>
+        function Girl() {
+            // 定义个dom元素放图片
+            this.dom = null;
+            // 定义个值表示每张图片数值
+            this.singel = 0;
+            // 定义小女孩的初始水平位置
+            this.x = 0;
+            // 小女孩垂直位置 1-500
+            this.y = parseInt(Math.random()*500+1); // 获取1-500随机整数   _.random(1,10);
+            // 定义行走速度
+            this.speed = parseInt(Math.random()*10+1); // 获取1-10随机整数  _.random(1,10);
+            this.init();
+            // 对dom元素进行监听绑定事件
+            this.bindEvent();
+            // 每个小女孩需要自己控制定时器，所以在初始化才开启定时器   
+            this.timer = null;
+            // 添加一个属性表示运动状态：暂停还是行动
+            this.isMove = true; // 默认一开始运动是true;
+        }
+
+        Girl.prototype.init = function() {
+            this.dom = document.createElement("div");
+            document.body.appendChild(this.dom);
+            // 先将外面的this保存起来
+            var _this = this;
+            this.timer = setInterval(function() {
+                // 不能这样this.update()调用，因为定时器的this表示window
+                if (_this.isMove) {
+                    _this.update();
+                }
+            },100);
+        }
+
+        Girl.prototype.update = function() {
+            this.x += this.speed;
+            // 判断是否过线
+            if (this.x>1000) {
+                // 小女孩隐藏
+                this.release();
+            }   
+            this.singel++;
+            if(this.singel>7) {
+                this.singel = 0;
+        }
+            this.dom.style.left = this.x + "px";
+            this.dom.style.top = this.y + "px";
+            // -79*1px  -216px表示第一张图片
+            this.dom.style.backgroundPosition = -79*this.singel+"px -216px";
+        }
+
+        // 消灭女孩
+        Girl.prototype.release = function() {
+            document.body.removeChild(this.dom);
+        }
+
+        Girl.prototype.bindEvent = function() {
+            var _this = this;
+            this.dom.onclick = function() {
+                if(_this.isMove) {
+                    clearInterval(_this.timer);
+                    _this.isMove = false;
+                } else {
+                    _this.timer = setInterval(function() {
+                        _this.update();
+                    },100);
+                    _this.isMove = true;
+                }
+                    
+            }
+        }
+        
+        /*
+        g1 = new Girl();
+        g2 = new Girl();
+        */
+        for(var i=0; i<20; i++) {
+            // 每次new对象都会调用构造函数，所以需要将数组放到构造函数中
+            new Girl();
+        }
+
+        // 定时器不能放在全局了，不然点击某个图片所有图片都会停止
+    </script>
+</body>
+</html>
+```
+
+    打气球实例
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 231.25px;
+            height: 300.7px;
+            background: url(star/ball.png);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="info"></h1>
+    <h2 id="e"></h2>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script>
+        var allTime = 20;
+        var allScore = 0;
+        function Ballon() {
+            this.dom = null;
+            this.x = _.random(0,document.documentElement.clientWidth - 236);
+            this.y = document.documentElement.clientHeight;
+            this.score = _.random(1,12);
+            this.init();
+            this.bindEvent();
+            array.push(this);
+        }
+
+        Ballon.prototype.init = function() {
+            this.dom = document.createElement("div");
+            document.body.appendChild(this.dom);
+            // 设置dom元素的位置
+            this.dom.style.left = this.x + "px";
+            this.dom.style.top = this.y + "px";
+            // 设置div的backgroundPosition
+            this.dom.style.backgroundPosition = -((this.score-1)%4)*231.25 + "px " +(-parseInt((this.score-1)/4)*300.7) +"px";
+
+            //    -231.25 0     
+            // 1   2    3   4       (this.score-1)%4*231.25
+            // 5   6    7   8       -300.7*1  parseInt((this.score-1)/4)
+            // 9   10   11  12      -300.7*2 
+        }
+
+        Ballon.prototype.move = function() {
+            this.y -= this.score;
+            this.dom.style.top = this.y + "px";
+        }
+
+        Ballon.prototype.bindEvent = function() {
+            var _this = this;
+            this.dom.onmousedown = function() {
+                allScore += _this.score; 
+                _this.goDie();
+            }
+        }
+
+        Ballon.prototype.goDie = function() {
+            document.body.removeChild(this.dom);
+            for(var i=0; i<array.length; i++) {
+                if (array[i] === this) {
+                    array.splice(i,1);
+                }
+            }
+        }
+
+        var array = [];
+        var frame = 0;
+        var timer = setInterval(function() {
+            frame++;
+            if (frame%100==0) {
+                allTime--;
+            }
+            if (allTime==0) {
+                alert("游戏结束");
+                clearInterval(timer);
+            }
+            if(frame%10==0) {
+                new Ballon();
+            } 
+            document.getElementById("info").innerHTML = allScore;  
+            _.each(array,function(item) {
+                item.move();
+            })
+        },10);
+    </script>
+</body>
+</html>
+```
+
+    小球碰撞
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #f40;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .box p {
+            position: absolute;
+            background: red;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+    </div>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script>
+        function Ballon() {
+            this.dom = null;
+            // 半径
+            this.r = 20;
+            // 圆心位置
+            this.x = _.random(this.r,500-this.r);
+            this.y = _.random(this.r,500-this.r);
+            // this.dx  this.dy 确保球运动 dx与dy不能同时为0
+            do {
+                this.dx = _.random(-5,5);// [-5,5]随机整数
+                this.dy = _.random(-5,5);
+            }while(this.dx==0&&this.dy==0);
+            console.log(this.dx,this.dy);
+            this.init();
+            arr.push(this);
+        }
+
+        Ballon.prototype.init = function() {
+            this.dom = document.createElement("p");
+            document.querySelector(".box").appendChild(this.dom);
+            this.dom.style.width = (2*this.r) + "px";
+            this.dom.style.height = (2*this.r) + "px";
+            this.dom.style.left = (this.x-this.r) + "px";
+            this.dom.style.top = (this.y-this.r) + "px";
+        }
+
+        Ballon.prototype.move = function() {
+            this.x += this.dx;
+            this.y += this.dy;
+            if (this.x-this.r<0 || this.x+this.r>500) {
+                this.dx = -this.dx;
+            } else if(this.y-this.r<0 || this.y+this.r>500) {
+                this.dy = -this.dy;
+            }
+            this.dom.style.left = (this.x-this.r) + "px";
+            this.dom.style.top = (this.y-this.r) + "px";
+        }
+        var arr = [];
+        new Ballon();
+        new Ballon();
+        new Ballon();
+        new Ballon();
+        new Ballon();
+        new Ballon();
+        setInterval(function() {
+            // 让所有的圆球运动
+            _.each(arr,function(item) {
+                item.move();
+            })
+        },10);
+    </script>
+</body>
+</html>
+```
+
+
 
 
